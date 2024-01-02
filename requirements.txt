@@ -1,3 +1,8 @@
 pip install django
 pip install rest framework
+pip install 
 pip install pillow
+pip install ChatterBot
+pip install chatterbot-corpus
+pip install spacy
+pip install nltk
