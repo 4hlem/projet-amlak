@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django_filters',
     'api.apps.ApiConfig',
     'django_rest_passwordreset',  
+    'chatterbot.ext.django_chatterbot', # chatterbot
+    'chatbot.apps.ChatbotConfig', 
 
 ]
 
