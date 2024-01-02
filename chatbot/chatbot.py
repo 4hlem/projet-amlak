@@ -7,7 +7,7 @@ spacy.cli.download("en")
 nlp = spacy.load('en_core_web_sm')
 
 chatbot = ChatBot(
-    'CoronaBot',
+    'AmlakBot',
     storage_adapter='chatterbot.storage.SQLStorageAdapter',
     logic_adapters=[
         'chatterbot.logic.MathematicalEvaluation',
