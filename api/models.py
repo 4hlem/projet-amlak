@@ -27,7 +27,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
     
-
+    def type_profile(self):
+        if self.is_company:
+            return True
+        else :
+            return False
 
 class Announcement(models.Model):
     
@@ -38,6 +42,7 @@ class Announcement(models.Model):
     wilaya= models.IntegerField(choices=WILAYA_CHOICES, null=False)
     type_bien = models.CharField(choices=BIEN_CHOICES, max_length=1, null=False)
     type_contrat = models.CharField(choices=CONTRAT_CHOICES, max_length=1, null=False)
+    surface=models.IntegerField(null=True) 
     meuble=models.BooleanField(null=True, blank=True)
     image = models.ImageField(upload_to='api/images/annonces',null=True,blank=True)
     price=models.IntegerField(null=False) 
@@ -88,7 +93,6 @@ class Announcement(models.Model):
         longitude = query_params.get('q', [''])[0].split(',')[1]
 
         return float(latitude), float(longitude)
-
 
 class IndividualProfile(models.Model):
 

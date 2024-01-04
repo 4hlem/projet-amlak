@@ -147,7 +147,9 @@ class AnnouncementDetail(APIView):
         announcement.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-class SimilarAnnouncements(APIView):
+class SimilarAnnouncements(generics.ListAPIView):
+    queryset = Announcement.objects.all()
+    serializer_class = AnnouncementListSerializer
     def get_announcement_pk(self,pk):
         try:
             announcement = Announcement.objects.get(pk=pk)
@@ -156,13 +158,9 @@ class SimilarAnnouncements(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
         
-        
-    def get(self,request,pk):
-        announcements = self.get_announcement_pk(pk)
-        serializer= AnnouncementListSerializer(announcements)
-        return Response({
-        'announcement': serializer.data})
-    
+    def get_queryset(self):
+        return self.get_announcement_pk(self.kwargs['pk'])
+ 
 #Add to fav
 class FavoriteView(APIView):
     bad_request_message = 'An error has occurred'
@@ -267,22 +265,10 @@ class UserProfile(APIView):
 class UserAnnouncements(generics.ListAPIView):
     queryset = Announcement.objects.all()
     serializer_class = AnnouncementDetailSerializer
-
-    def get_user(self, pk):
-        try:
-            return CustomUser.objects.get(id=pk)
-        except:
-            return None
-
-    def get(self, request, pk):
-        user = self.get_user(pk=pk)
-
-        announcement = Announcement.objects.filter(user=user)
-        if announcement == None:
-            return Response({"status": "fail", "message": "Announcement with Id: {pk} not found"}, status=status.HTTP_404_NOT_FOUND)
-
-        serializer = self.serializer_class(announcement)
-        return Response({"status": "success", "announcement": serializer.data})
+    def get_queryset(self):
+        return Announcement.objects.filter(user_id=self.kwargs['pk'])
+    
+    
 
   
 

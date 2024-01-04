@@ -9,11 +9,11 @@ urlpatterns=[
     path('announcements/filter', FilterAnnouncementList.as_view()),#fonctionne exemple : http://127.0.0.1:8000/api/announcements/filter?type_contrat=V
     path('new-post/',AnnouncementCreate.as_view()), #fonctionne
     path('announcement/<int:pk>', AnnouncementDetail.as_view(http_method_names=['get'])), #fonctionne
-    path('announcement/<int:pk>/similar', SimilarAnnouncements.as_view(http_method_names=['get'])), #non 
+    path('announcement/<int:pk>/similar', SimilarAnnouncements.as_view(http_method_names=['get'])), #Oui
     path('announcement/<int:pk>/update', AnnouncementDetail.as_view(http_method_names=['put'])),#fonctionne recoit l'attribut à modifier
     path('announcement/<int:pk>/delete', AnnouncementDetail.as_view(http_method_names=['delete'])), #fonctionne 
     path('profile/<int:pk>', UserProfile.as_view()),   # FONCTIONNE
-    path('profile/<int:pk>/announcements', UserAnnouncements.as_view()),  #NON
+    path('profile/<int:pk>/announcements', UserAnnouncements.as_view()),#OUi
     path('myprofile/profile/',MyProfile.as_view()),#fonctionne 
     path('myprofile/profile/update',UpdateProfile.as_view()),#fonctionne recoit l'attribut à modifier exemple {"type_contrat":"L" }
     path('change-password/', change_password, name='change password'),#fonctionne recoit ancien mdp et nouveau mdp (ne déconnnecte pas) 

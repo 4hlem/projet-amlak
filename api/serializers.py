@@ -81,7 +81,7 @@ class AnnouncementDetailSerializer(serializers.ModelSerializer):
     user=UserSerializer()
     class Meta:
         model = Announcement
-        fields = ['user','title','description','image','type_bien','type_contrat','price','wilaya','last_updated_at','appartment_address']
+        fields = ['user','title','description','image','type_bien','type_contrat','price','meuble','surface','wilaya','last_updated_at','appartment_address']
         read_only_fields= ['user']
 
 #serializer pour créer/modifier
@@ -90,21 +90,24 @@ class CreateAnnouncementSerializer(serializers.ModelSerializer):
     user=UserSerializer()
     class Meta:
         model = Announcement
-        fields = ['user','title','description','image','meuble','type_bien','type_contrat','price','wilaya','appartment_address']
+        fields = ['user','title','description','image','meuble','surface','type_bien','type_contrat','price','wilaya','appartment_address']
 
 class UpdateAnnouncementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
-        fields = ['title','description','image','meuble','type_bien','type_contrat','price','wilaya','appartment_address']
-        extra_kwargs = {'title':{'required': False},'description':{'required': False},'image':{'required': False},'meuble':{'required': False},'type_bien':{'required': False},'type_contrat':{'required': False},'price':{'required': False} ,'wilaya':{'required': False} ,'appartment_address': {'required': False}}
+        fields = ['title','description','image','meuble','type_bien','type_contrat','price','wilaya','appartment_address','surface']
+        extra_kwargs = {'title':{'required': False},'description':{'required': False},'image':{'required': False},'meuble':{'required': False},'type_bien':{'required': False},'type_contrat':{'required': False},'price':{'required': False} ,'wilaya':{'required': False} ,'surface':{'required': False},'appartment_address': {'required': False}}
 
 #Pour filtrer
 class AnnouncementFilterSet(filters.FilterSet):
     min_price = filters.NumberFilter(field_name='price', lookup_expr='gte')
     max_price = filters.NumberFilter(field_name='price', lookup_expr='lte')
+    min_surface = filters.NumberFilter(field_name='surface',lookup_expr='gte')
+    max_surface = filters.NumberFilter(field_name='surface',lookup_expr='lte')
+
     class Meta:
         model = Announcement
-        fields = ['wilaya','price','meuble','type_contrat','type_bien']
+        fields = ['wilaya','price','meuble','type_contrat','type_bien','surface']
 
 
 
