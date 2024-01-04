@@ -81,7 +81,7 @@ class AnnouncementDetailSerializer(serializers.ModelSerializer):
     user=UserSerializer()
     class Meta:
         model = Announcement
-        fields = ['user','title','description','image','type_bien','type_contrat','price','meuble','surface','wilaya','last_updated_at','appartment_address']
+        fields = ['user','title','description','image','type_bien','type_contrat','price','wilaya','last_updated_at','appartment_address']
         read_only_fields= ['user']
 
 #serializer pour créer/modifier
@@ -95,8 +95,8 @@ class CreateAnnouncementSerializer(serializers.ModelSerializer):
 class UpdateAnnouncementSerializer(serializers.ModelSerializer):
     class Meta:
         model = Announcement
-        fields = ['title','description','image','meuble','type_bien','type_contrat','price','wilaya','appartment_address','surface']
-        extra_kwargs = {'title':{'required': False},'description':{'required': False},'image':{'required': False},'meuble':{'required': False},'type_bien':{'required': False},'type_contrat':{'required': False},'price':{'required': False} ,'wilaya':{'required': False} ,'surface':{'required': False},'appartment_address': {'required': False}}
+        fields = ['title','description','image','meuble','type_bien','type_contrat','price','wilaya','appartment_address']
+        extra_kwargs = {'title':{'required': False},'description':{'required': False},'image':{'required': False},'meuble':{'required': False},'type_bien':{'required': False},'type_contrat':{'required': False},'price':{'required': False} ,'wilaya':{'required': False} ,'appartment_address': {'required': False}}
 
 #Pour filtrer
 class AnnouncementFilterSet(filters.FilterSet):
